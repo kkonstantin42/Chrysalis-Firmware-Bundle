@@ -38,7 +38,11 @@
 
 enum {
   MACRO_QWERTY,
-  MACRO_VERSION_INFO
+  MACRO_VERSION_INFO,
+  MACRO_MAC_SCREENSHOT_FULL_SAVE, //MACRO#2
+  MACRO_MAC_SCREENSHOT_FULL_CPBRD, //MACRO#3
+  MACRO_MAC_SCREENSHOT_REGION_SAVE, //MACRO#4
+  MACRO_MAC_SCREENSHOT_REGION_CPBRD //MACRO#5
 };
 
 #define Key_Exclamation LSHIFT(Key_1)
@@ -126,6 +130,35 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
     if (keyToggledOn(event.state)) {
       Macros.type(PSTR("Keyboardio Atreus - Kaleidoscope "));
       Macros.type(PSTR(BUILD_INFORMATION));
+    }
+    break;
+  case MACRO_MAC_SCREENSHOT_FULL_SAVE:
+    if (keyToggledOn(event.state)) {
+        return MACRO(D(LeftGui), D(LeftShift), D(3));
+        return Macros.type(PSTR("Macro works! "));
+    } else if (keyToggledOff(event.state)) {
+        return MACRO(U(LeftGui), U(LeftShift), U(3));
+    }
+    break;
+  case MACRO_MAC_SCREENSHOT_FULL_CPBRD:
+    if (keyToggledOn(event.state)) {
+        return MACRO(D(LeftGui), D(LeftControl), D(LeftShift), D(3));
+    } else if (keyToggledOff(event.state)) {
+        return MACRO(U(LeftGui), U(LeftControl), U(LeftShift), U(3));
+    }
+    break;
+  case MACRO_MAC_SCREENSHOT_REGION_SAVE:
+    if (keyToggledOn(event.state)) {
+        return MACRO(D(LeftGui), D(LeftShift), D(4));
+    } else if (keyToggledOff(event.state)) {
+        return MACRO(U(LeftGui), U(LeftShift), U(4));
+    }
+    break;
+  case MACRO_MAC_SCREENSHOT_REGION_CPBRD:
+    if (keyToggledOn(event.state)) {
+        return MACRO(D(LeftGui), D(LeftControl), D(LeftShift), D(4));
+    } else if (keyToggledOff(event.state)) {
+        return MACRO(U(LeftGui), U(LeftControl), U(LeftShift), U(4));
     }
     break;
   default:
